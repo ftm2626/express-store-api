@@ -1,9 +1,11 @@
 require("dotenv").config();
+require("express-async-errors")
 const express = require("express");
 const { notFound } = require("./middleware/not-found");
 const { errorHandlerMiddleware } = require("./middleware/error-handler");
 const { connectDB } = require("./db/connect");
 const ProductRouter = require("./routes/products");
+
 
 const app = express();
 app.use(express.json());
@@ -16,9 +18,7 @@ app.use(errorHandlerMiddleware);
 
 const start = async () => {
   try {
-    await connectDB(
-      "mongodb+srv://fatemeh:1234@express-task.xwkvxqf.mongodb.net/STORE-API?retryWrites=true&w=majority"
-    ).catch((e) => console.log(e));
+    await connectDB(process.env.MONGO_URI)
     app.listen(5000, () => {
       console.log("server running...");
     });

@@ -6,7 +6,24 @@ const geAllProductsStatic = async (req, res) => {
 };
 
 const geAllProducts = async (req, res) => {
-  res.status(200).json({ msg: "product testing route" });
+  const product = await products.find({});
+  res.status(200).json({ msg: "success", data: product });
 };
 
-module.exports = { geAllProducts, geAllProductsStatic };
+const getSearchAllProducts = async (req, res) => {
+  const { name, featured,company } = req.query;
+  const queryObject = {};
+  if (name) {
+    queryObject.name = name;
+  }
+  if (featured) {
+    queryObject.featured = featured;
+  }
+  if (company) {
+    queryObject.company = company;
+  }
+  const product = await products.find(queryObject);
+  res.status(200).json({ msg: "success", data: product });
+};
+
+module.exports = { geAllProducts, geAllProductsStatic, getSearchAllProducts };

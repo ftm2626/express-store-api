@@ -19,10 +19,10 @@ const productSchema = new mongoose.Schema({
   },
   company: {
     type: String,
-    // enum: {
-    //   value: ["ikea", "liddy", "caressa", "marcos"],
-    //   message: "{VALUE} is not valid!",
-    // },
+    enum: {
+      values: ["ikea", "liddy", "caressa", "marcos"],
+      message: "{VALUE} is not valid!",
+    },
     // enum: ["ikea", "liddy", "caressa", "marcos"],
   },
   createdAt: {
